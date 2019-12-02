@@ -1,0 +1,58 @@
+from string import ascii_lowercase, ascii_uppercase
+
+def middle_way(a, b):
+    new = [a[1],b[1]]
+    return (new)
+
+"""print(middle_way([1, 2, 3], [4, 5, 6]))  # → [2, 5]
+print(middle_way([7, 7, 7], [3, 8, 0]))  # → [7, 8]
+print(middle_way([5, 2, 9], [1, 4, 5]))  # → [2, 4]"""
+
+def dict(st):
+    d = {}
+    for s in st:
+        if d.__contains__(s) == False:
+            d[s] = 1
+        elif d.__contains__(s):
+            d[s] += 1
+    return d
+
+#print(dict("abzzaf"))
+
+def create_cipher():
+    alphabet_lower = ascii_lowercase*2
+    alphabet_upper = ascii_uppercase*2
+    cipher = {}
+    for letter in ascii_lowercase:
+        cipher[letter] = alphabet_lower[alphabet_lower.index(letter) + 13]
+    for letter in ascii_uppercase:
+        cipher[letter] = alphabet_upper[alphabet_upper.index(letter) + 13]
+    cipher[' '] = ' '
+    cipher['.'] = '.'
+    cipher[','] = ','
+    cipher['!'] = '!'
+    cipher['?'] = '?'
+    return cipher
+
+print(create_cipher())
+
+def encrypt(message):
+    cipher = create_cipher()
+    encrypted_message = ''
+    for letter in message:
+        encrypted_message += cipher.get(letter)
+    return encrypted_message
+
+print(encrypt('abc'))
+
+def decrypt(message):
+    cipher = create_cipher()
+    decrypted_message = ''
+    for letter in message:
+        for key, value in cipher.items():
+            if value == letter:
+                decrypted_message += key
+    return decrypted_message
+
+print(decrypt('nop'))
+print(decrypt('V NZ YRNEAVAT CLGUBA JVGU FUR PBQRF NPNQRZL!'))
